@@ -1,0 +1,91 @@
+#menu-block{
+    background-color:burlywood;
+    height: 100vh;
+    overflow-y:auto;
+    margin-right: 0px;
+    margin:0;
+    z-index: 0;
+}
+
+#menu-title{
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.option{
+    height: 25px;
+    cursor: pointer;
+}
+
+.option-text:hover{
+    outline: none;
+    box-shadow: inset 0 0 20px 0 #CECECE;
+    border: 1px solid #9F9F9F;
+    cursor: pointer;
+    border-bottom:cornsilk solid 2px;
+}
+
+.option-text{
+    margin-top:30px;
+    border-bottom: chocolate solid 2px;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+.main-option-text{
+    margin-top:35px;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+.main-option{
+    margin-top:25px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#right-arrow{
+    font-size: 14px;
+    color:rgb(107, 65, 33);
+    padding-top: 3px;
+    margin-left: 8px;
+}
+
+#right-arrow-table{
+    font-size: 14px;
+    color:rgb(107, 65, 33);
+    padding-top: 3px;
+    margin-left: 26px;
+}
+
+#formular-options{
+    width: 120px;
+    margin-left: 40px;
+}
+
+#right-arrow:hover{
+    cursor: pointer;
+}
+
+#right-arrow-table:hover{
+    cursor: pointer;
+}
+
+.rotate-90{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate-90-table {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    margin-left: 26px;
+}

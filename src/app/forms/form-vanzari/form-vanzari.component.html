@@ -1,0 +1,178 @@
+<div class="d-flex">
+    <app-menu id="menu-object"></app-menu>
+    <div class="col-sm-8 mt-4">
+        <div id="form-title">
+            Adauga o noua Vanzare
+        </div>
+        <div class="d-flex">
+            <form class="col-sm-6" [formGroup]="vanzareForm">
+                    <div class="row">
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field > 
+                                <mat-label>Cod Partener</mat-label>
+                                <mat-select formControlName="codPartener" >
+                                <mat-option *ngFor="let partener of partenerLista" [value]="partener.CodPartener">
+                                    {{partener.NumePartener}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input matInput  formControlName="status" required placeholder="Status" pattern="[A-Za-z]{1}">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input type="date"[value]="today | date:'dd/mm/yyyy'" (input)="parseData($event.target.value)" matInput placeholder="Data"  formControlName="data" required >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input  type="date"[value]="today | date:'dd/mm/yyyy'" (input)="parseDataLivrare($event.target.value)" matInput placeholder="Data Livrare"  formControlName="dataLivrare" required >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Vat"  formControlName="vatVanzare"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Total"  formControlName="total" required >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Discount"  formControlName="discountVanzare" required >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input  matInput placeholder="Moneda"  formControlName="moneda" required pattern="[A-Za-z]{3}">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Platit"  formControlName="platit" required >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field >
+                                <input  matInput placeholder="Comentarii"  formControlName="comentarii" required >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field > 
+                                <mat-label>Cod Vanzator</mat-label>
+                                <mat-select formControlName="codVanzator" >
+                                <mat-option *ngFor="let vanzator of vanzatorLista" [value]="vanzator.CodVanzator">
+                                    {{vanzator.Nume + " " +vanzator.Prenume}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <mat-form-field > 
+                                <mat-label>Id Sucursala</mat-label>
+                                <mat-select formControlName="idSucursala" >
+                                <mat-option *ngFor="let sucursala of sucursalaLista" [value]="sucursala.IDSucursala">
+                                    {{sucursala.NumeSucursala}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+                <form class="col-sm-12 " [formGroup]="linieVanzare">
+                <div class="col-sm-6">
+                    <div style="font-size: 18px; font-weight: 500;">
+                        Adauga o Linie de Vanzare
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-1">
+                            <mat-form-field > 
+                                <mat-label>Cod Articol</mat-label>
+                                <mat-select formControlName="codArticol" >
+                                <mat-option *ngFor="let articol of articolLista" [value]="articol.CodArticol">
+                                    {{articol.NumeArticol}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-1">
+                            <mat-form-field >
+                                <input type="number" matInput  formControlName="cantitate" required placeholder="Cantitate">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-1">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Pret"  formControlName="pret" required >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-6 mt-1">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Discount"  formControlName="discount" required >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mt-1">
+                            <mat-form-field >
+                                <input type="number" matInput placeholder="Vat"  formControlName="vat"  >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 mt-2">
+                            <mat-form-field > 
+                                <mat-label>Id Proiect</mat-label>
+                                <mat-select formControlName="idProiect" >
+                                <mat-option *ngFor="let proiect of proiectLista" [value]="proiect.IDProiect">
+                                    {{proiect.NumeProiect}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div  class="row mt-2">
+                        <div class="col-sm-6">
+                            <button id="adauga-linie-btn" (click)="adaugaLinieVanzare()">Adauga Linie Vanzare</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div *ngIf="listaLiniiVanzari.length>0">
+            <div class="row">
+                <div class="cols-m-12">
+                    <div  class="mb-2" style="font-size: 20px; font-weight: 500;">Linii vanzari adaugate</div>
+                    <div  class="mt-2" *ngFor="let linieVanzare of listaLiniiVanzari" style="font-size: 18px; font-weight: 400;">
+                        {{"Canitate: "+ linieVanzare.Cantitate + " | Pret: "+ linieVanzare.Pret + " | Cod Articol: "+ linieVanzare.CodArticol + " | Total: "+ linieVanzare.TotalLinie}}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 mt-4">
+                <button id="adauga-btn"  type="submit" (click)="adaugaVanzareFinala()">Adauga Vanzare</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

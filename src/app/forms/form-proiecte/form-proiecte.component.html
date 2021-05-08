@@ -1,0 +1,58 @@
+<div class="d-flex">
+    <app-menu id="menu-object"></app-menu>
+    <div class="col-sm-5 mt-4" id="form">
+        <div id="form-title">
+            Adauga un Proiect nou
+        </div>
+        <form class="col-sm-12" [formGroup]="proiectForm">
+            <div class="row">
+                <div class="col-sm-12 mt-4">
+                    <mat-form-field >
+                        <input matInput  formControlName="idProiect" required placeholder="Id Proiect">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mt-4">
+                    <mat-form-field class="add-border" >
+                        <input matInput placeholder="Nume Proiect" formControlName="numeProiect">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mt-4">
+                    <div>Valid de la</div>
+                    <mat-form-field class="add-border" >
+                            <input type="date"[value]="today | date:'dd/mm/yyyy'" (input)="parseValidDeLa($event.target.value)" matInput formControlName="validDeLa">
+                    </mat-form-field>
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mt-4">
+                    <div>Valid de la</div>
+                    <mat-form-field class="add-border" >
+                            <input type="date"[value]="today | date:'dd/mm/yyyy'" (input)="parseValidPanaLa($event.target.value)" matInput formControlName="validPanaLa">
+                    </mat-form-field>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 mt-4">
+                    <mat-form-field class="add-border">
+                        <input matInput formControlName="activ" pattern="[a-zA-Z]{1}" placeholder="Activ Y/N">
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div  class="row mt-4">
+                <div class="col-sm-12">
+                    <button id="adauga-btn" (click)="adaugaProiect()">Adauga</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+

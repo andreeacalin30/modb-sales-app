@@ -1,0 +1,133 @@
+<div id="menu-block" class="col-sm-3">
+    <div id="menu-title" (click)="goToHomePage()">
+        Menu
+    </div>
+    <div class="main-option">
+        <div class="main-option-text" class="d-flex" (click)="openFormularOptions()">
+            FORMULARE
+            <span  id="right-arrow" >
+                <div *ngIf=" formularOptions==true">
+                    <i   class="fas fa-greater-than rotate-90" ></i>
+                </div>
+            </span>
+            <span  id="right-arrow">
+                <div *ngIf=" formularOptions==false">
+                    <i   class="fas fa-greater-than" ></i>
+                </div>
+            </span>
+        </div>
+    </div>
+    <div id="formular-options" *ngIf="formularOptions">
+        <div class="option">
+            <div class="option-text" (click)="goToArticoleForm()">
+                Articole
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToParteneriForm()">
+                Parteneri
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToVanzatoriForm()">
+                Vanzatori
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToVanzariForm()">
+                Vanzari
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToSucursaleForm()">
+                Sucursale
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToProiecteForm()">
+                Proiecte
+            </div>
+        </div>
+    </div>
+
+    <div class="main-option"  (click)="openTableOptions()">
+        <div class="main-option-text" class="d-flex">
+            TABELE
+            <span  id="right-arrow-table" >
+                <div *ngIf=" tabelOptions==true">
+                    <i   class="fas fa-greater-than rotate-90-table"></i>
+                </div>
+            </span>
+            <span  id="right-arrow-table" >
+                <div *ngIf=" tabelOptions==false">
+                    <i   class="fas fa-greater-than" ></i>
+                </div>
+            </span>
+        </div>
+    </div>
+    <div id="formular-options" *ngIf="tabelOptions">
+        <div class="option">
+            <div class="option-text" (click)="goToArticoleTable()">
+                Articole
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToParteneriTable()">
+                Parteneri
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToVanzatoriTable()">
+                Vanzatori
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToVanzariTable()">
+                Vanzari
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToSucursaleTable()">
+                Sucursale
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToProiecteTable()">
+                Proiecte
+            </div>
+        </div>
+    </div>
+
+    <div class="main-option"  (click)="openRapoarteOptions()">
+        <div class="main-option-text" class="d-flex">
+            RAPOARTE
+            <span  id="right-arrow-table" >
+                <div *ngIf=" rapoarteOptions==true">
+                    <i   class="fas fa-greater-than rotate-90-table"></i>
+                </div>
+            </span>
+            <span  id="right-arrow-table" >
+                <div *ngIf=" rapoarteOptions==false">
+                    <i   class="fas fa-greater-than" ></i>
+                </div>
+            </span>
+        </div>
+    </div>
+    <div id="formular-options" *ngIf="rapoarteOptions">
+        <div class="option">
+            <div class="option-text" (click)="goToRaportForm()">
+                Formular rapoarte
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToGrafice1()">
+                Grafice 1
+            </div>
+        </div>
+        <div class="option">
+            <div class="option-text" (click)="goToGrafice2()">
+                Grafice 2
+            </div>
+        </div>
+    </div>
+</div>

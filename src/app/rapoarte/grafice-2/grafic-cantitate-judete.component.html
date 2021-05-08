@@ -1,0 +1,46 @@
+<div class="d-flex">
+    <app-menu id="menu-object"></app-menu>
+    <div class="col-sm-10 mt-4 d-flex" style="overflow-y: scroll;">
+        <div>
+            <div id="form-title">
+                Grafic Discountul acordat din valoarea totala a facturii pentru fiecare trimestru
+            </div>
+            <div style="display: block; width:600px; height: 400px;">
+                <apx-chart
+                    [series]="chartOptionsDiscount.series"
+                    [chart]="chartOptionsDiscount.chart"
+                    [xaxis]="chartOptionsDiscount.xaxis"
+                    [dataLabels]="chartOptionsDiscount.dataLabels"
+                    [grid]="chartOptionsDiscount.grid"
+                    [stroke]="chartOptionsDiscount.stroke"
+                    [title]="chartOptionsDiscount.title">
+                </apx-chart>
+            </div>
+        </div>
+       
+        <div style="margin-left: 20px;">
+            <div id="form-title">
+                Grafic Volumul mediu livrat in fiecare zi a saptamanii
+            </div>
+            <div style="display: block; width:600px; height: 600px;">
+                <canvas mdbChart
+                    [chartType]="chartType"
+                    [datasets]="chartDatasetsVolumLivratZile"
+                    [labels]="chartLabelsVolum"
+                    [colors]="chartColors"
+                    [options]="chartOptions"
+                    [legend]="true"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div>
+        
+    </div>
+
+</div>
+
+
+

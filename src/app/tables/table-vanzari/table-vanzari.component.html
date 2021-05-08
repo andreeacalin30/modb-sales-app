@@ -1,0 +1,53 @@
+<div class="d-flex">
+    <app-menu id="menu-object"></app-menu>
+    <div class="col-sm-8 mt-4">
+        <div id="form-title">
+            Inregistrari Vanzari
+        </div>
+        <div class="mat-elevation-z8" style="overflow-y: scroll; height: 500px;margin-top: 0;">
+            <div *ngFor="let vanzare of vanzariLista" >
+                <div style="background-color: bisque; ">
+                    <div style="font-weight: 500;">
+                        {{"IDIntrare: "+vanzare.IDIntrare + " Status: "+ vanzare.Status + " Data: "+vanzare.Data }}
+                    </div>
+                    <div  style="font-weight: 500;">
+                        {{"Data Livrare: "+vanzare.DataLivrare + " Discount: "+ vanzare.Discount + " Moneda: "+vanzare.Moneda }}
+                    </div>
+                    <div  style="font-weight: 500;">
+                        {{"Platit: "+vanzare.Platit + " Total: "+ vanzare.Total + " Comentarii: "+vanzare.Comentarii }}
+                    </div>
+                </div>
+                <div *ngFor="let linii of liniiVanzari">
+                    <div *ngFor="let linie of linii"  >
+                        <div *ngIf="linie.IDIntrare==vanzare.IDIntrare" style="cursor: pointer;" class="d-flex">
+                            <div style="padding-top: 3px;">
+                                <span class="material-icons" >
+                                    arrow_right_alt
+                                    </span>
+                            </div>
+                            <div style="padding-top: 3px; margin-right: 20px;">
+                                <span >
+                                    {{"TotalLinie: "+linie.TotalLinie + " CodArticol: "+linie.CodArticol + " Cantitate: "+ linie.Cantitate + " Pret: "+linie.Pret }}
+                                </span>
+                            </div>
+                            <div style="padding-top: 3px;" (click)="deleteLinieVanzare($event, linie.IDIntrare, linie.NumarLinie)">
+                                <span class="material-icons" >
+                                    delete
+                                    </span>
+                            </div>
+                            <div style="padding-top: 3px;" (click)="editLinieVanzare($event, linie.IDIntrare, linie.NumarLinie)">
+                                <span class="material-icons" >
+                                    edit
+                                    </span>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+</div>
+
