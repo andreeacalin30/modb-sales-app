@@ -100,7 +100,15 @@
             </div>
         </form>
     </div>
-
-
+    <div class="col-sm-4" style="margin-top: 120px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Choose a database</mat-label>
+            <mat-select (selectionChange)="selectedValue($event)">
+                <mat-option *ngFor="let connection of dbConnections" [value]="connection.value">
+                    {{connection.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 </div>
 

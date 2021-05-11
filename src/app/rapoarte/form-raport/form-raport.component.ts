@@ -1,7 +1,7 @@
 import { GridOptions, Module } from '@ag-grid-community/all-modules';
 import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSelectChange, MatSort, MatTableDataSource } from '@angular/material';
 import { RaportDTO } from 'src/app/models/raportDTO.model';
 import { RaportValoriMediiDTO } from 'src/app/models/raportValoriMediiDTO.model';
 import { RaportValoriNormaleDTO } from 'src/app/models/raportValoriNormaleDTO';
@@ -37,6 +37,18 @@ export class FormRaportComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public defaultDB = 'conn1'
+  public selectedConnection: any;
+
   public afiseazaRaportLista=[{nume: "Valori normale"}, 
   {nume:"Media valorilor"},
   {nume: "Totalul valorilor"}]
@@ -53,8 +65,13 @@ export class FormRaportComponent implements OnInit {
       dataEnd:[''],
       afiseazaRaport:['']
     });
+    this.selectedConnection=this.defaultDB;
   };
     
+    selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+  }
 
    async getValoriCombinateRaport(raportDTO: RaportDTO){
     var lista= await this.salesService.getValoriCombinateRaport(raportDTO).toPromise();
@@ -69,27 +86,27 @@ export class FormRaportComponent implements OnInit {
 
 
    async getVanzatoriLista(){
-    var lista= await this.salesService.getVanzatori().toPromise();
+    var lista= await this.salesService.getVanzatori( this.selectedConnection).toPromise();
     return lista
    }
 
    async getSucursaleLista(){
-    var lista= await this.salesService.getSucursale().toPromise();
+    var lista= await this.salesService.getSucursale( this.selectedConnection).toPromise();
     return lista
    }
 
    async getArticoleLista(){
-    var lista= await this.salesService.getArticole().toPromise();
+    var lista= await this.salesService.getArticole( this.selectedConnection).toPromise();
     return lista
    }
 
    async getProiecteLista(){
-    var lista= await this.salesService.getProiecte().toPromise();
+    var lista= await this.salesService.getProiecte( this.selectedConnection).toPromise();
     return lista
    }
 
    async getParteneriLista(){
-    var lista= await this.salesService.getParteneri().toPromise();
+    var lista= await this.salesService.getParteneri( this.selectedConnection).toPromise();
     return lista
    }
 

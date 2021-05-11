@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 import { Adresa } from 'src/app/models/adresa.model';
 import { Sucursala } from 'src/app/models/sucursala.model';
 import { SucursalaDTO } from 'src/app/models/sucursalaDTO.model';
@@ -17,6 +18,16 @@ export class FormSucursaleComponent implements OnInit {
     {value: '2'},
     {value: '3'}
   ];
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public selectedConnection: any;
 
   constructor( private formBuilder: FormBuilder, private salesService: SalesService) {
 
@@ -32,6 +43,12 @@ export class FormSucursaleComponent implements OnInit {
       etaj: ['', [Validators.required]]
     });
    }
+
+  selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+  }
+
    adaugaSucursala(){
      let sucursala=new Sucursala(null,this.sucursalaForm.get('numeSucursala').value,
      null)
@@ -40,7 +57,7 @@ export class FormSucursaleComponent implements OnInit {
      this.sucursalaForm.get('strada').value,this.sucursalaForm.get('numar').value,this.sucursalaForm.get('bloc').value,
      this.sucursalaForm.get('etaj').value)
      let sucursalaDTO=new SucursalaDTO(sucursala, adresa);
-     this.salesService.postSucursala(sucursalaDTO).subscribe(data=>{console.log(data)})
+     this.salesService.postSucursala(sucursalaDTO, this.selectedConnection).subscribe(data=>{console.log(data)})
    }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 import { Articol } from 'src/app/models/articol.model';
 import { SalesService } from 'src/app/services/sales.service';
 
@@ -12,6 +13,18 @@ export class FormArticolComponent implements OnInit {
   public articolForm: FormGroup;
   public umLista:any;
   public grupeArticoleLista:any;
+  public selectedConnection: any;
+  
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+
    constructor( private formBuilder: FormBuilder, private salesService: SalesService) {
 
     this.articolForm = this.formBuilder.group({
@@ -24,13 +37,20 @@ export class FormArticolComponent implements OnInit {
     
    }
 
+   selectedValue(event: MatSelectChange) {
+    this.selectedConnection = event.value;
+    console.log(this.selectedConnection);
+}
+
    async getUMLista(){
-    var umLista= await this.salesService.getUM().toPromise();
+     //posibil sa hardcodam db-ul din care apeleaza
+    var umLista= await this.salesService.getUM(this.selectedConnection).toPromise();
     return umLista
    }
 
    async getCodGrupeLista(){
-    var lista= await this.salesService.getGrupeArticole().toPromise();
+      //posibil sa hardcodam db-ul din care apeleaza
+    var lista= await this.salesService.getGrupeArticole(this.selectedConnection).toPromise();
     return lista
    }
 
@@ -47,10 +67,10 @@ export class FormArticolComponent implements OnInit {
 adaugaArticol(){
   if(this.articolForm.valid){
     let newArticol=new Articol(this.articolForm.get('codArticol').value,this.articolForm.get('numeArticol').value,this.articolForm.get('codGrupa').value,
-    this.articolForm.get('cantitateStoc').value,this.articolForm.get('idUnitateMasura').value)
+    this.articolForm.get('cantitateStoc').value,this.articolForm.get('idUnitateMasura').value);
     console.log(newArticol)
     this.articolForm.get('codArticol').setValue(this.makeid(7));
-    this.salesService.postArticol(newArticol).subscribe(data=>{console.log(data)});
+    this.salesService.postArticol(newArticol,  this.selectedConnection).subscribe(data=>{console.log(data)});
   }
 }
 

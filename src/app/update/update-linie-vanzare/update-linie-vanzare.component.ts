@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LinieVanzare } from 'src/app/models/linie-vanzare.model';
 import { Vanzare } from 'src/app/models/vanzare.model';
@@ -19,29 +20,39 @@ export class UpdateLinieVanzareComponent implements OnInit {
   public articolLista: any;
   public proiectLista: any;
   public partenerLista: any;
+    public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public selectedConnection: any;
 
   async getVanzatoriLista(){
-    var lista= await this.salesService.getVanzatori().toPromise();
+    var lista= await this.salesService.getVanzatori(this.selectedConnection).toPromise();
     return lista
    }
 
    async getSucursaleLista(){
-    var lista= await this.salesService.getSucursale().toPromise();
+    var lista= await this.salesService.getSucursale(this.selectedConnection).toPromise();
     return lista
    }
 
    async getArticoleLista(){
-    var lista= await this.salesService.getArticole().toPromise();
+    var lista= await this.salesService.getArticole(this.selectedConnection).toPromise();
     return lista
    }
 
    async getProiecteLista(){
-    var lista= await this.salesService.getProiecte().toPromise();
+    var lista= await this.salesService.getProiecte(this.selectedConnection).toPromise();
     return lista
    }
 
    async getParteneriLista(){
-    var lista= await this.salesService.getParteneri().toPromise();
+    var lista= await this.salesService.getParteneri(this.selectedConnection).toPromise();
     return lista
    }
 
@@ -64,6 +75,11 @@ export class UpdateLinieVanzareComponent implements OnInit {
       idProiect:['', [Validators.required]]
     });
    }
+
+    selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+  }
   async ngOnInit() {
     let IDIntrare;
     let NumarLinie;
@@ -127,17 +143,17 @@ export class UpdateLinieVanzareComponent implements OnInit {
   }
 
   async getLinieVanzare(event:any, IdIntrare: string){
-    var lista= await this.salesService.getVanzari().toPromise();
+    var lista= await this.salesService.getVanzari(this.selectedConnection).toPromise();
     return lista
   }
 
   async getLiniiByIdLista(IdIntrare:any){
-    var lista= await this.salesService.getLiniiVanzariByIdVanzare(IdIntrare).toPromise();
+    var lista= await this.salesService.getLiniiVanzariByIdVanzare(IdIntrare,this.selectedConnection).toPromise();
     return lista
    }
 
    async getVanzariLista(){
-    var lista= await this.salesService.getVanzari().toPromise();
+    var lista= await this.salesService.getVanzari(this.selectedConnection).toPromise();
     return lista
    }
 

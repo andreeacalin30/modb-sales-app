@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSelectChange, MatSort, MatTableDataSource } from '@angular/material';
 import { GeneralDialogComponent } from 'src/app/dialogs/general-dialog/general-dialog.component';
 import { Vanzare } from 'src/app/models/vanzare.model';
 import { SalesService } from 'src/app/services/sales.service';
@@ -16,18 +16,42 @@ export class TableVanzariComponent implements OnInit {
   public vanzariLista: any;
   public liniiVanzari: any=[];
 
+    public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public defaultDB = 'conn1'
+  public selectedConnection: any;
+
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  constructor(private salesService: SalesService, private dialog:MatDialog) { }
+  constructor(private salesService: SalesService, private dialog:MatDialog) { 
+    this.selectedConnection=this.defaultDB;
+  }
 
   isExpansionDetailRow = (row: any) => row.hasOwnProperty('detailRow');
 
   async ngOnInit() {
-    this.incarcaLiniiTabel();
+   this.fillTable();
+  }
+
+  async fillTable(){
+     this.incarcaLiniiTabel();
    
     this.dataSource = new MatTableDataSource( this.vanzariLista);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+      this.fillTable();
   }
 
   async incarcaLiniiTabel(){
@@ -41,7 +65,7 @@ export class TableVanzariComponent implements OnInit {
   }
 
   async getVanzariLista(){
-    var lista= await this.salesService.getVanzari().toPromise();
+    var lista= await this.salesService.getVanzari(this.selectedConnection).toPromise();
     return lista
    }
 
@@ -53,19 +77,19 @@ export class TableVanzariComponent implements OnInit {
     let dialogRef = this.dialog.open(GeneralDialogComponent);
 
      dialogRef.componentInstance.onOk.subscribe(() => {
-      this.salesService.deleteLinieVanzare(IDIntrare, NumarLinie).subscribe(data=>{console.log(data);
+      this.salesService.deleteLinieVanzare(IDIntrare, NumarLinie, this.selectedConnection).subscribe(data=>{console.log(data);
         this.liniiVanzari=[];
         this.incarcaLiniiTabel();})
       });
  }
 
   async getLinieVanzare(event:any, IdIntrare: string){
-    var lista= await this.salesService.getVanzari().toPromise();
+    var lista= await this.salesService.getVanzari( this.selectedConnection).toPromise();
     return lista
   }
 
   async getLiniiByIdLista(IdIntrare:any){
-    var lista= await this.salesService.getLiniiVanzariByIdVanzare(IdIntrare).toPromise();
+    var lista= await this.salesService.getLiniiVanzariByIdVanzare(IdIntrare, this.selectedConnection).toPromise();
     return lista
    }
 }

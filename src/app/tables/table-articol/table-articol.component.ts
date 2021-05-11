@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSelectChange, MatSort, MatTableDataSource } from '@angular/material';
 import { Articol } from 'src/app/models/articol.model';
 import { SalesService } from 'src/app/services/sales.service';
 
@@ -15,9 +15,34 @@ export class TableArticolComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  constructor(private salesService: SalesService) { }
+
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public defaultDB = 'conn1'
+  public selectedConnection: any;
+
+  constructor(private salesService: SalesService) { 
+    this.selectedConnection=this.defaultDB;
+  }
+
+  selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+      this.fillTable();
+  }
 
   async ngOnInit() {
+    this.fillTable();
+  }
+
+  async fillTable(){
     this.articoleLista=await this.getArticoleLista();
     this.dataSource = new MatTableDataSource( this.articoleLista);
     this.dataSource.paginator = this.paginator;
@@ -25,7 +50,7 @@ export class TableArticolComponent implements OnInit {
   }
 
   async getArticoleLista(){
-    var lista= await this.salesService.getArticole().toPromise();
+    var lista= await this.salesService.getArticole(this.selectedConnection).toPromise();
     return lista
    }
 

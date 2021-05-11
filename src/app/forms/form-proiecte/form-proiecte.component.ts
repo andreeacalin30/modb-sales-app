@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 import { Proiect } from 'src/app/models/proiect.model';
 import { SalesService } from 'src/app/services/sales.service';
 
@@ -13,6 +14,16 @@ export class FormProiecteComponent implements OnInit {
   public proiectForm: FormGroup;
   validDeLa: any;
   validPanaLa: any;
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public selectedConnection: any;
   constructor( private formBuilder: FormBuilder, private salesService:SalesService) {
 
     this.proiectForm = this.formBuilder.group({
@@ -28,11 +39,16 @@ export class FormProiecteComponent implements OnInit {
   ngOnInit() {
   }
 
+  selectedValue(event: MatSelectChange) {
+    this.selectedConnection = event.value;
+    console.log(this.selectedConnection);
+}
+
   adaugaProiect(){
     let proiect=new Proiect(this.proiectForm.get('idProiect').value, this.proiectForm.get('numeProiect').value,
     this.validDeLa,this.validPanaLa,
     this.proiectForm.get('activ').value)
-    this.salesService.postProiect(proiect).subscribe(data=>{console.log(data)})
+    this.salesService.postProiect(proiect, this.selectedConnection).subscribe(data=>{console.log(data)})
   }
 
   parseValidDeLa(value: any){

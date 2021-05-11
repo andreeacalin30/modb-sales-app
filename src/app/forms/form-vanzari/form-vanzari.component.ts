@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 import { LinieVanzare } from 'src/app/models/linie-vanzare.model';
 import { Vanzare } from 'src/app/models/vanzare.model';
 import { VanzareDTO } from 'src/app/models/vanzareDTO.model';
@@ -19,31 +20,46 @@ export class FormVanzariComponent implements OnInit {
   public articolLista: any;
   public proiectLista: any;
   public partenerLista: any;
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public selectedConnection: any;
 
   async getVanzatoriLista(){
-    var lista= await this.salesService.getVanzatori().toPromise();
+    var lista= await this.salesService.getVanzatori(this.selectedConnection).toPromise();
     return lista
    }
 
    async getSucursaleLista(){
-    var lista= await this.salesService.getSucursale().toPromise();
+    var lista= await this.salesService.getSucursale( this.selectedConnection).toPromise();
     return lista
    }
 
    async getArticoleLista(){
-    var lista= await this.salesService.getArticole().toPromise();
+    var lista= await this.salesService.getArticole( this.selectedConnection).toPromise();
     return lista
    }
 
    async getProiecteLista(){
-    var lista= await this.salesService.getProiecte().toPromise();
+    var lista= await this.salesService.getProiecte( this.selectedConnection).toPromise();
     return lista
    }
 
    async getParteneriLista(){
-    var lista= await this.salesService.getParteneri().toPromise();
+    var lista= await this.salesService.getParteneri( this.selectedConnection).toPromise();
     return lista
    }
+
+   selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+  }
 
 
   dataVanzare: any;
@@ -148,8 +164,8 @@ export class FormVanzariComponent implements OnInit {
     this.vanzareForm.get('vatVanzare').value,this.vanzareForm.get('discountVanzare').value,this.vanzareForm.get('moneda').value,
     this.vanzareForm.get('platit').value,this.vanzareForm.get('comentarii').value,this.vanzareForm.get('codVanzator').value,
     this.vanzareForm.get('idSucursala').value)
-    let vanzareFinala = new VanzareDTO(vanzareDeBaza, this.listaLiniiVanzari)
-    this.salesService.postVanzare(vanzareFinala).subscribe();
+    let vanzareFinala = new VanzareDTO(vanzareDeBaza, this.listaLiniiVanzari);
+    this.salesService.postVanzare(vanzareFinala, this.selectedConnection).subscribe();
     console.log(vanzareFinala);
   }
 

@@ -4,6 +4,16 @@
         <div id="form-title">
             Inregistrari Articole
         </div>
+        <div style="margin-top: 50px; margin-left: -20px;" class="col-sm-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a database</mat-label>
+            <mat-select (selectionChange)="selectedValue($event)" [(value)]="defaultDB">
+              <mat-option *ngFor="let connection of dbConnections" [value]="connection.value">
+                {{connection.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Articol" #input>

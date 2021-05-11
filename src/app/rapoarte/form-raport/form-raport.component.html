@@ -1,5 +1,6 @@
 <div class="d-flex">
     <app-menu id="menu-object"></app-menu>
+    
     <div class="col-sm-10 mt-4">
         <div id="form-title">
             Adauga un Raport nou
@@ -124,6 +125,14 @@
           
             <mat-paginator  #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="paginator.pageSize"></mat-paginator>
         </div>
+        <mat-form-field appearance="fill" class="col-sm-3">
+            <mat-label>Choose a database</mat-label>
+            <mat-select (selectionChange)="selectedValue($event)" [(value)]="defaultDB">
+                <mat-option *ngFor="let connection of dbConnections" [value]="connection.value">
+                    {{connection.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
 
 </div>

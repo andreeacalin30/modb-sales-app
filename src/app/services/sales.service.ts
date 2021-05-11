@@ -27,43 +27,49 @@ export class SalesService {
   private FormReportCombinedPath=Settings.serverUrl+"/groupedFormReport";
   constructor(private http: HttpClient) { }
 
-  getUM(): Observable<any> {
+  getUM(dbConnection:any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.UMPath, {
-        headers
+        headers, params
     }); 
   }
 
-  getVanzatori(): Observable<any> {
+  getVanzatori(dbConnection:any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.VanzatoriPath, {
-        headers
+        headers, params
     }); 
   }
 
-  getVanzari(): Observable<any> {
+  getVanzari(dbConnection:any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.VanzariPath, {
-        headers
+        headers, params
     }); 
   }
 
-  getLiniiVanzariByIdVanzare(idVanzare: any): Observable<any> {
+  getLiniiVanzariByIdVanzare(idVanzare: any, dbConnection: any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
@@ -72,6 +78,7 @@ export class SalesService {
     .set('Content-Type', 'application/json');
     const params=new HttpParams()
     .set('IDIntrare', idVanzare)
+    .set('dbConnection', dbConnection.toString())
     return this.http.get(this.LiniiVanzariPath, {
         headers, params
     }); 
@@ -163,67 +170,77 @@ export class SalesService {
     }); 
   }
 ///////////////////////////////////
-  getArticole(): Observable<any> {
+  getArticole(dbConnection: any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.ArticolePath, {
-        headers
+        headers, params
     }); 
   }
 
-  getParteneri(): Observable<any> {
+  getParteneri(dbConnection: any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.ParteneriPath, {
-        headers
+        headers,params
     }); 
   }
 
-  getSucursale(): Observable<any> {
+  getSucursale(dbConnection: any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.SucursalePath, {
-        headers
+        headers, params
     }); 
   }
 
-  getProiecte(): Observable<any> {
+  getProiecte(dbConnection: any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.ProiectePath, {
-        headers
+        headers, params
     }); 
   }
 
-  getGrupeArticole(): Observable<any> {
+  getGrupeArticole(dbConnection:any): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
     .set('Access-Control-Allow-Origin', '*')
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', '*')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.get(this.GrupeArticolePath, {
-        headers
+        headers, params
     }); 
   }
 
-  postPartener(partenerDTO: PartenerDTO): Observable<any> {
+  postPartener(partenerDTO: PartenerDTO, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -231,12 +248,14 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.post(this.ParteneriPath, partenerDTO, {
-        headers
+        headers, params
     }); 
   }
 
-  postArticol(articol: Articol): Observable<any> {
+  postArticol(articol: Articol, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -244,12 +263,14 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.post(this.ArticolePath, articol, {
-        headers
+        headers, params
     }); 
   }
 
-  postProiect(proiect: Proiect): Observable<any> {
+  postProiect(proiect: Proiect, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -257,12 +278,14 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.post(this.ProiectePath, proiect, {
-        headers
+        headers, params
     }); 
   }
 
-  postVanzator(vanzatorDTO: VanzatorDTO): Observable<any> {
+  postVanzator(vanzatorDTO: VanzatorDTO, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -270,12 +293,14 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.post(this.VanzatoriPath, vanzatorDTO, {
-        headers
+        headers, params
     }); 
   }
 
-  postSucursala(sucursalaDTO: SucursalaDTO): Observable<any> {
+  postSucursala(sucursalaDTO: SucursalaDTO, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -283,12 +308,14 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.post(this.SucursalePath, sucursalaDTO, {
-        headers
+        headers, params
     }); 
   }
 
-  postVanzare(vanzareDTO: VanzareDTO): Observable<any> {
+  postVanzare(vanzareDTO: VanzareDTO, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -296,8 +323,10 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+    let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
     return this.http.post(this.VanzariPath, vanzareDTO, {
-        headers
+        headers, params
     }); 
   }
 
@@ -315,7 +344,7 @@ export class SalesService {
     }); 
   }
 
-  deleteLinieVanzare(IDIntrare: any, NumarLinie: any): Observable<any> {
+  deleteLinieVanzare(IDIntrare: any, NumarLinie: any, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -326,6 +355,8 @@ export class SalesService {
     const params=new HttpParams()
     .set('IDIntrare', IDIntrare)
     .set('NumarLinie', NumarLinie)
+    .set('dbConnection', dbConnection.toString())
+
     return this.http.delete(this.LiniiVanzariPath, {
         headers, params
     }); 

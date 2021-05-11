@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
 import { Adresa } from 'src/app/models/adresa.model';
 import { Vanzator } from 'src/app/models/vanzator.model';
 import { VanzatorDTO } from 'src/app/models/vanzatorDTO.model';
@@ -11,6 +12,16 @@ import { SalesService } from 'src/app/services/sales.service';
 })
 export class FormVanzatoriComponent implements OnInit {
   public vanzatoriForm: FormGroup;
+   public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public selectedConnection: any;
   constructor( private formBuilder: FormBuilder, private salesService: SalesService) {
 
     this.vanzatoriForm = this.formBuilder.group({
@@ -30,6 +41,11 @@ export class FormVanzatoriComponent implements OnInit {
     });
    }
 
+   selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+  }
+
    adaugaVanzator(){
      let vanzator=new Vanzator(null,this.vanzatoriForm.get('numeVanzator').value,
      this.vanzatoriForm.get('prenumeVanzator').value,this.vanzatoriForm.get('salariuBaza').value,this.vanzatoriForm.get('comision').value,
@@ -39,7 +55,7 @@ export class FormVanzatoriComponent implements OnInit {
      this.vanzatoriForm.get('strada').value,this.vanzatoriForm.get('numar').value,this.vanzatoriForm.get('bloc').value,
      this.vanzatoriForm.get('etaj').value)
      let vanzatorDTO=new VanzatorDTO(vanzator, adresa);
-     this.salesService.postVanzator(vanzatorDTO).subscribe(data=>{console.log(data)})
+     this.salesService.postVanzator(vanzatorDTO, this.selectedConnection).subscribe(data=>{console.log(data)})
    }
   ngOnInit() {
   }

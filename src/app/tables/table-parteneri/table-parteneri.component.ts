@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSelectChange, MatSort, MatTableDataSource } from '@angular/material';
 import { Partener } from 'src/app/models/partener.model';
 import { SalesService } from 'src/app/services/sales.service';
 
@@ -12,12 +12,35 @@ export class TableParteneriComponent implements OnInit {
   displayedColumns: string[] = ['codPartener', 'numePartener', 'cui', 'email', 'idAdresa'];
   dataSource: MatTableDataSource<Partener>;
   public parteneriLista: any;
+  public dbConnections=[
+    {
+      value: 'conn1'
+    },{
+       value: 'conn2'
+    },{
+       value: 'conn3'
+    }
+  ]
+  public defaultDB = 'conn1'
+  public selectedConnection: any;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  constructor(private salesService: SalesService) { }
+  constructor(private salesService: SalesService) {
+     this.selectedConnection=this.defaultDB;
+   }
+
+   selectedValue(event: MatSelectChange) {
+      this.selectedConnection = event.value;
+      console.log(this.selectedConnection);
+      this.fillTable();
+  }
 
   async ngOnInit() {
+    this.fillTable();
+  }
+
+  async fillTable(){
     this.parteneriLista=await this.getParteneriLista();
     this.dataSource = new MatTableDataSource( this.parteneriLista);
     this.dataSource.paginator = this.paginator;
@@ -25,7 +48,7 @@ export class TableParteneriComponent implements OnInit {
   }
 
   async getParteneriLista(){
-    var lista= await this.salesService.getParteneri().toPromise();
+    var lista= await this.salesService.getParteneri(this.selectedConnection).toPromise();
     return lista
    }
 

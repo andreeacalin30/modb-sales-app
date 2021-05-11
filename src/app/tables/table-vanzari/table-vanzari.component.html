@@ -4,6 +4,16 @@
         <div id="form-title">
             Inregistrari Vanzari
         </div>
+        <div style="margin-top: 50px; margin-left: -15px;" class="col-sm-3">
+            <mat-form-field appearance="fill">
+                <mat-label>Choose a database</mat-label>
+                <mat-select (selectionChange)="selectedValue($event)" [(value)]="defaultDB">
+                    <mat-option *ngFor="let connection of dbConnections" [value]="connection.value">
+                        {{connection.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <div class="mat-elevation-z8" style="overflow-y: scroll; height: 500px;margin-top: 0;">
             <div *ngFor="let vanzare of vanzariLista" >
                 <div style="background-color: bisque; ">
