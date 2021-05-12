@@ -32,21 +32,26 @@ export class FormRaportComponent implements OnInit {
   public valoriMediiDTO:RaportValoriMediiDTO;
   public valoriTotaleDTO:RaportValoriTotaleDTO;
 
-  displayedColumns: string[] = ['pret', 'cantitate', 'vat', 'discount', 'platit', 'comision', 'volum', 'numarTranzactii'];
+  displayedColumns: string[] = ['pret', 'cantitate', 'vat', 'discount', 'platit', 'numarTranzactii'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
-  public defaultDB = 'conn1'
+  public defaultDB = 'global'
   public selectedConnection: any;
 
   public afiseazaRaportLista=[{nume: "Valori normale"}, 
@@ -66,6 +71,8 @@ export class FormRaportComponent implements OnInit {
       afiseazaRaport:['']
     });
     this.selectedConnection=this.defaultDB;
+    console.log(this.selectedConnection);
+   
   };
     
     selectedValue(event: MatSelectChange) {
@@ -86,7 +93,7 @@ export class FormRaportComponent implements OnInit {
 
 
    async getVanzatoriLista(){
-    var lista= await this.salesService.getVanzatori( this.selectedConnection).toPromise();
+    var lista= await this.salesService.getVanzatori(this.selectedConnection).toPromise();
     return lista
    }
 
@@ -96,17 +103,17 @@ export class FormRaportComponent implements OnInit {
    }
 
    async getArticoleLista(){
-    var lista= await this.salesService.getArticole( this.selectedConnection).toPromise();
+    var lista= await this.salesService.getArticole(this.selectedConnection).toPromise();
     return lista
    }
 
    async getProiecteLista(){
-    var lista= await this.salesService.getProiecte( this.selectedConnection).toPromise();
+    var lista= await this.salesService.getProiecte(this.selectedConnection).toPromise();
     return lista
    }
 
    async getParteneriLista(){
-    var lista= await this.salesService.getParteneri( this.selectedConnection).toPromise();
+    var lista= await this.salesService.getParteneri(this.selectedConnection).toPromise();
     return lista
    }
 
@@ -137,8 +144,6 @@ export class FormRaportComponent implements OnInit {
   }
   
   async afiseazaRaport(){
-
-    
       this.valori=true;
       let numePartener=this.raportForm.get('numePartener').value!=""?this.raportForm.get('numePartener').value:""
       let numeSucursala=this.raportForm.get('numeSucursala').value!=""?this.raportForm.get('numeSucursala').value:""
@@ -152,7 +157,10 @@ export class FormRaportComponent implements OnInit {
       this.valoriNormaleList=await this.getValoriRaport(raportDTO);
       this.valoriCombinateList=await this.getValoriCombinateRaport(raportDTO);
       let valoriMedii=[]
-      valoriMedii.push(this.valoriCombinateList[1])
+      if(this.valoriCombinateList.length>0){
+         valoriMedii.push(this.valoriCombinateList[1])
+      }
+     
       let valoriTotale=[]
       valoriTotale.push(this.valoriCombinateList[0])
       console.log(this.valoriNormaleList)
