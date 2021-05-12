@@ -31,6 +31,7 @@ export class FormSucursaleComponent implements OnInit {
        value: 'local4'
     }
   ]
+   public defaultDB = 'global'
   public selectedConnection: any;
 
   constructor( private formBuilder: FormBuilder, private salesService: SalesService) {
@@ -46,6 +47,7 @@ export class FormSucursaleComponent implements OnInit {
       bloc: ['', [Validators.required]],
       etaj: ['', [Validators.required]]
     });
+     this.selectedConnection=this.defaultDB
    }
 
   selectedValue(event: MatSelectChange) {

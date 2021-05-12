@@ -1,3 +1,4 @@
+import { CdkNestedTreeNode } from '@angular/cdk/tree';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSelectChange, MatSort, MatTableDataSource } from '@angular/material';
 import { Proiect } from 'src/app/models/proiect.model';
@@ -12,6 +13,7 @@ export class TableProiecteComponent implements OnInit {
   displayedColumns: string[] = ['idProiect', 'numeProiect', 'validDeLa', 'validPanaLa', 'activ'];
   dataSource: MatTableDataSource<Proiect>;
   public proiecteLista: any;
+  public nuExistaTabela= false;
   public dbConnections=[
     {
       value: 'global'
@@ -46,17 +48,23 @@ export class TableProiecteComponent implements OnInit {
 
   async fillTable(){
     this.proiecteLista=await this.getProiecteLista();
-    this.dataSource = new MatTableDataSource( this.proiecteLista);
+    if(this.proiecteLista==null){
+      this.nuExistaTabela=true;
+    } else {
+      this.nuExistaTabela=false;
+       this.dataSource = new MatTableDataSource( this.proiecteLista);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    }
+   
   }
 
 
   async getProiecteLista(){
-    var lista= await this.salesService.getProiecte(this.selectedConnection).toPromise();
+    var lista= await this.salesService.getProiecte(this.selectedConnection).toPromise().catch(()=>{
+    });
     return lista
    }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

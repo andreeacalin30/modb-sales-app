@@ -14,7 +14,7 @@ export class FormArticolComponent implements OnInit {
   public umLista:any;
   public grupeArticoleLista:any;
   public selectedConnection: any;
-  
+   public defaultDB = 'global'
   public dbConnections=[
     {
       value: 'global'
@@ -38,7 +38,7 @@ export class FormArticolComponent implements OnInit {
       cantitateStoc: ['', [Validators.required]],
       idUnitateMasura:['', [Validators.required]]
     });
-    
+      this.selectedConnection=this.defaultDB;
    }
 
    selectedValue(event: MatSelectChange) {

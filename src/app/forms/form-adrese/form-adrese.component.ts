@@ -26,6 +26,7 @@ export class FormAdreseComponent implements OnInit {
     }
   ]
   public selectedConnection: any;
+  public defaultDB = "global"
   constructor( private formBuilder: FormBuilder, private salesService: SalesService) {
 
     this.adreseForm = this.formBuilder.group({
@@ -38,6 +39,7 @@ export class FormAdreseComponent implements OnInit {
       bloc: ['', [Validators.required]],
       etaj: ['', [Validators.required]]
     });
+     this.selectedConnection=this.defaultDB
    }
 
    makeid(length) {

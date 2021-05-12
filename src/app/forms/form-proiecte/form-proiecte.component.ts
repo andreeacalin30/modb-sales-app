@@ -28,6 +28,7 @@ export class FormProiecteComponent implements OnInit {
     }
   ]
   public selectedConnection: any;
+   public defaultDB = 'global'
   constructor( private formBuilder: FormBuilder, private salesService:SalesService) {
 
     this.proiectForm = this.formBuilder.group({
@@ -39,6 +40,7 @@ export class FormProiecteComponent implements OnInit {
     });
 
     this.proiectForm.get('idProiect').setValue(this.makeid(8));
+    this.selectedConnection=this.defaultDB
    }
   ngOnInit() {
   }

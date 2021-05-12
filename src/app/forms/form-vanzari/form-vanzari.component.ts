@@ -33,6 +33,7 @@ export class FormVanzariComponent implements OnInit {
        value: 'local4'
     }
   ]
+   public defaultDB = 'global'
   public selectedConnection: any;
 
   async getVanzatoriLista(){
@@ -95,6 +96,7 @@ export class FormVanzariComponent implements OnInit {
       vat:['', [Validators.required]],
       idProiect:['', [Validators.required]]
     });
+     this.selectedConnection=this.defaultDB
    }
   async ngOnInit() {
     this.listaLiniiVanzari=new Array<LinieVanzare>();
