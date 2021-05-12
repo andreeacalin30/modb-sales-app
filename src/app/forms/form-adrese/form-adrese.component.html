@@ -1,0 +1,83 @@
+<div class="d-flex">
+  <app-menu id="menu-object"></app-menu>
+  <div class="col-sm-5 mt-4" id="form">
+    <div id="form-title">
+      Adauga o Adresa noua
+    </div>
+    <form class="col-sm-12 d-flex" [formGroup]="adreseForm">
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Nume Adresa" formControlName="numeAdresa">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Oras" formControlName="oras">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Judet" formControlName="judet">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Sector" formControlName="sector">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Strada" formControlName="strada">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Numar" formControlName="numar">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input matInput placeholder="Bloc" formControlName="bloc">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 mt-4">
+            <mat-form-field class="add-border">
+              <input type="number" matInput placeholder="Etaj" formControlName="etaj">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-sm-12">
+            <button id="adauga-btn" (click)="adaugaAdresa()">Adauga</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-4" style="margin-top: 120px;">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a database</mat-label>
+      <mat-select (selectionChange)="selectedValue($event)">
+        <mat-option *ngFor="let connection of dbConnections" [value]="connection.value">
+          {{connection.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

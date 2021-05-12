@@ -31,6 +31,11 @@ export class MenuComponent implements OnInit {
   goToArticoleForm(){
     this.router.navigateByUrl('/form-articole');
   }
+
+  goToAdreseForm(){
+    this.router.navigateByUrl('/form-adrese');
+  }
+
   goToParteneriForm(){
     this.router.navigateByUrl('/form-parteneri');
   }
@@ -52,6 +57,10 @@ export class MenuComponent implements OnInit {
   goToArticoleTable(){
     this.router.navigateByUrl('/table-articole');
   }
+  goToAdreseTable(){
+    this.router.navigateByUrl('/table-adrese');
+  }
+  
   goToParteneriTable(){
     this.router.navigateByUrl('/table-parteneri');
   }

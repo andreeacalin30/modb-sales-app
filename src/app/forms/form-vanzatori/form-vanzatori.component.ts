@@ -12,13 +12,17 @@ import { SalesService } from 'src/app/services/sales.service';
 })
 export class FormVanzatoriComponent implements OnInit {
   public vanzatoriForm: FormGroup;
-   public dbConnections=[
+  public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
   public selectedConnection: any;

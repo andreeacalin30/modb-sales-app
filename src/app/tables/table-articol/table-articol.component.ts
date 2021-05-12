@@ -18,14 +18,18 @@ export class TableArticolComponent implements OnInit {
 
   public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
-  public defaultDB = 'conn1'
+  public defaultDB = 'global'
   public selectedConnection: any;
 
   constructor(private salesService: SalesService) { 

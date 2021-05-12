@@ -17,11 +17,17 @@ import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/updat
 import { FormRaportComponent } from './rapoarte/form-raport/form-raport.component';
 import { GraficeComponent } from './rapoarte/grafice/grafice.component';
 import { GraficCantitateJudeteComponent } from './rapoarte/grafice-2/grafic-cantitate-judete.component';
+import { TableAdreseComponent } from './tables/table-adrese/table-adrese.component';
+import { FormAdreseComponent } from './forms/form-adrese/form-adrese.component';
 
 const routes: Routes = [
   {
     path: 'form-articole',
     component: FormArticolComponent
+  },
+  {
+    path: 'form-adrese',
+    component: FormAdreseComponent
   },
   {
     path: 'form-parteneri',
@@ -49,6 +55,10 @@ const routes: Routes = [
   {
     path: 'table-articole',
     component: TableArticolComponent
+  },
+  {
+    path: 'table-adrese',
+    component: TableAdreseComponent
   },
   {
     path: 'table-parteneri',

@@ -16,16 +16,20 @@ export class TableVanzariComponent implements OnInit {
   public vanzariLista: any;
   public liniiVanzari: any=[];
 
-    public dbConnections=[
+  public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
-  public defaultDB = 'conn1'
+  public defaultDB = 'global'
   public selectedConnection: any;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -84,7 +88,7 @@ export class TableVanzariComponent implements OnInit {
  }
 
   async getLinieVanzare(event:any, IdIntrare: string){
-    var lista= await this.salesService.getVanzari( this.selectedConnection).toPromise();
+    var lista= await this.salesService.getVanzari(this.selectedConnection).toPromise();
     return lista
   }
 

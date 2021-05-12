@@ -18,16 +18,22 @@ export class TableVanzatoriComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
-  public defaultDB = 'conn1'
+  public defaultDB = 'global'
   public selectedConnection: any;
-  constructor(private salesService: SalesService) { }
+  constructor(private salesService: SalesService) {
+    this.selectedConnection=this.defaultDB;
+   }
 
   async ngOnInit() {
     this.fillTable();
@@ -35,6 +41,25 @@ export class TableVanzatoriComponent implements OnInit {
 
   async fillTable(){
     this.vanzatoriLista=await this.getVanzatoriLista();
+    this.displayedColumns = []
+ 
+      if(this.vanzatoriLista[0].CodVanzator!=""){
+         this.displayedColumns.push('codVanzator')
+      }  if(this.vanzatoriLista[0].Nume!=""){
+         this.displayedColumns.push('numeVanzator')
+      }  if(this.vanzatoriLista[0].Prenume!=""){
+         this.displayedColumns.push('prenume')
+      } if(this.vanzatoriLista[0].SalariuBaza!=""){
+         this.displayedColumns.push('salariuBaza')
+      } if(this.vanzatoriLista[0].Comision!=""){
+         this.displayedColumns.push('comision')
+      }
+      if(this.vanzatoriLista[0].Email!=""){
+              this.displayedColumns.push('email')
+      } if(this.vanzatoriLista[0].IDAdresa!=""){
+              this.displayedColumns.push('idAdresa')
+      }
+    console.log(this.displayedColumns)
     this.dataSource = new MatTableDataSource( this.vanzatoriLista);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -47,7 +72,8 @@ export class TableVanzatoriComponent implements OnInit {
     }
 
   async getVanzatoriLista(){
-    var lista= await this.salesService.getVanzatori( this.selectedConnection).toPromise();
+    console.log(this.selectedConnection)
+    var lista= await this.salesService.getVanzatori(this.selectedConnection).toPromise();
     return lista
    }
 

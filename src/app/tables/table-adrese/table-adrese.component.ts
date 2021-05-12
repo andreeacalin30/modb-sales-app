@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSelectChange, MatSort, MatTableDataSource } from '@angular/material';
-import { Partener } from 'src/app/models/partener.model';
+import { Adresa } from 'src/app/models/adresa.model';
 import { SalesService } from 'src/app/services/sales.service';
 
 @Component({
-  selector: 'app-table-parteneri',
-  templateUrl: './table-parteneri.component.html',
-  styleUrls: ['./table-parteneri.component.scss']
+  selector: 'app-table-adrese',
+  templateUrl: './table-adrese.component.html',
+  styleUrls: ['./table-adrese.component.scss']
 })
-export class TableParteneriComponent implements OnInit {
-  displayedColumns: string[] = ['codPartener', 'numePartener', 'cui', 'email', 'idAdresa'];
-  dataSource: MatTableDataSource<Partener>;
-  public parteneriLista: any;
+export class TableAdreseComponent implements OnInit {
+
+  displayedColumns: string[] = ['idAdresa', 'numeAdresa', 'oras', 'judet', 'sector', 'strada', 'numar', 'bloc', 'etaj'];
+  dataSource: MatTableDataSource<Adresa>;
+  public adreseLista: any;
   public dbConnections=[
     {
       value: 'global'
@@ -45,28 +46,37 @@ export class TableParteneriComponent implements OnInit {
   }
 
   async fillTable(){
-    this.parteneriLista=await this.getParteneriLista();
+    this.adreseLista=await this.getParteneriLista();
     this.displayedColumns = []
  
-      if(this.parteneriLista[0].CodPartener!=""){
-         this.displayedColumns.push('codPartener')
-      }  if(this.parteneriLista[0].NumePartener!=""){
-         this.displayedColumns.push('numePartener')
-      }  if(this.parteneriLista[0].CUI!=""){
-         this.displayedColumns.push('cui')
-      } if(this.parteneriLista[0].Email!=""){
-         this.displayedColumns.push('email')
-      } if(this.parteneriLista[0].IDAdresa!=""){
+      if(this.adreseLista[0].IDAdresa!=""){
          this.displayedColumns.push('idAdresa')
+      }  if(this.adreseLista[0].NumeAdresa!=""){
+         this.displayedColumns.push('numeAdresa')
+      }  if(this.adreseLista[0].Oras!=""){
+         this.displayedColumns.push('oras')
+      } if(this.adreseLista[0].Judet!=""){
+         this.displayedColumns.push('judet')
+      } if(this.adreseLista[0].Sector!=""){
+         this.displayedColumns.push('sector')
+      }if(this.adreseLista[0].Strada!=""){
+         this.displayedColumns.push('strada')
+      }if(this.adreseLista[0].Numar!=""){
+         this.displayedColumns.push('numar')
+      }if(this.adreseLista[0].Bloc!=""){
+         this.displayedColumns.push('bloc')
+      }if(this.adreseLista[0].Etaj!=""){
+         this.displayedColumns.push('etaj')
       }
+
     console.log(this.displayedColumns)
-    this.dataSource = new MatTableDataSource( this.parteneriLista);
+    this.dataSource = new MatTableDataSource( this.adreseLista);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   async getParteneriLista(){
-    var lista= await this.salesService.getParteneri(this.selectedConnection).toPromise();
+    var lista= await this.salesService.getAdrese(this.selectedConnection).toPromise();
     return lista
    }
 

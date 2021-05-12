@@ -22,11 +22,15 @@ export class FormVanzariComponent implements OnInit {
   public partenerLista: any;
   public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
   public selectedConnection: any;

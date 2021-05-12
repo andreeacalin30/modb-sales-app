@@ -37,6 +37,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { AgGridModule } from '@ag-grid-community/angular';
 import {  TableModule } from 'angular-bootstrap-md';
 import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.component';
+import { TableAdreseComponent } from './tables/table-adrese/table-adrese.component';
+import { FormAdreseComponent } from './forms/form-adrese/form-adrese.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,9 @@ import { ErrorDialogComponent } from './dialogs/error-dialog/error-dialog.compon
     FormRaportComponent,
     GraficeComponent,
     GraficCantitateJudeteComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    TableAdreseComponent,
+    FormAdreseComponent
   ],
   entryComponents:[GeneralDialogComponent,ErrorDialogComponent],
   imports: [

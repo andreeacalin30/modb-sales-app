@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Adresa } from '../models/adresa.model';
 import { Articol } from '../models/articol.model';
 import { PartenerDTO } from '../models/partenerDTO.model';
 import { Proiect } from '../models/proiect.model';
@@ -15,6 +16,7 @@ import { Settings } from '../settings';
 })
 export class SalesService {
   private UMPath=Settings.serverUrl+"/um";
+  private AdresePath=Settings.serverUrl+"/adrese";
   private VanzatoriPath=Settings.serverUrl+"/vanzatori";
   private ArticolePath=Settings.serverUrl+"/articole";
   private ParteneriPath=Settings.serverUrl+"/parteneri";
@@ -37,6 +39,20 @@ export class SalesService {
      let params = new HttpParams()
             .set('dbConnection', dbConnection.toString())
     return this.http.get(this.UMPath, {
+        headers, params
+    }); 
+  }
+
+  getAdrese(dbConnection:any): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
+    return this.http.get(this.AdresePath, {
         headers, params
     }); 
   }
@@ -266,6 +282,21 @@ export class SalesService {
      let params = new HttpParams()
             .set('dbConnection', dbConnection.toString())
     return this.http.post(this.ArticolePath, articol, {
+        headers, params
+    }); 
+  }
+
+  postAdresa(adresa: Adresa, dbConnection:any): Observable<any> {
+    console.log('post')
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    .set('Content-Type', 'application/json');
+     let params = new HttpParams()
+            .set('dbConnection', dbConnection.toString())
+    return this.http.post(this.AdresePath, adresa, {
         headers, params
     }); 
   }
