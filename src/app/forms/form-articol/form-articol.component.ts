@@ -73,8 +73,8 @@ adaugaArticol(){
     let newArticol=new Articol(this.articolForm.get('codArticol').value,this.articolForm.get('numeArticol').value,this.articolForm.get('codGrupa').value,
     this.articolForm.get('cantitateStoc').value,this.articolForm.get('idUnitateMasura').value);
     console.log(newArticol)
-    this.articolForm.get('codArticol').setValue(this.makeid(7));
-    this.salesService.postArticol(newArticol,  this.selectedConnection).subscribe(data=>{console.log(data)});
+    this.salesService.postArticol(newArticol,  this.selectedConnection).subscribe(data=>{console.log(data);
+    this.articolForm.get('codArticol').setValue(this.makeid(7));});
   }
 }
 

@@ -19,12 +19,6 @@ export class TableProiecteComponent implements OnInit {
       value: 'global'
     },{
        value: 'local1'
-    },{
-       value: 'local2'
-    },{
-       value: 'local3'
-    },{
-       value: 'local4'
     }
   ]
   public defaultDB = 'global'

@@ -103,6 +103,7 @@ export class GraficeComponent implements OnInit {
       this.chartLabelsGrupe.push(this.vanzariGrupaArticole[i].NumeGrupa)
     }
     this.chart1Ready=true;
+    console.log('primul chart')
     console.log( this.chartDatasetsVanzareTotalaGrupe)
     console.log( this.chartLabelsGrupe)
   }

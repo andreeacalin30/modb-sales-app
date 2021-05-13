@@ -19,12 +19,6 @@ export class FormProiecteComponent implements OnInit {
       value: 'global'
     },{
        value: 'local1'
-    },{
-       value: 'local2'
-    },{
-       value: 'local3'
-    },{
-       value: 'local4'
     }
   ]
   public selectedConnection: any;
@@ -54,7 +48,8 @@ export class FormProiecteComponent implements OnInit {
     let proiect=new Proiect(this.proiectForm.get('idProiect').value, this.proiectForm.get('numeProiect').value,
     this.validDeLa,this.validPanaLa,
     this.proiectForm.get('activ').value)
-    this.salesService.postProiect(proiect, this.selectedConnection).subscribe(data=>{console.log(data)})
+    this.salesService.postProiect(proiect, this.selectedConnection).subscribe(data=>{console.log(data);
+    this.proiectForm.get('idProiect').setValue(this.makeid(8));})
   }
 
   parseValidDeLa(value: any){

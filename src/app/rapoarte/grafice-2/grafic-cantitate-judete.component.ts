@@ -29,7 +29,7 @@ export class GraficCantitateJudeteComponent implements OnInit {
   @ViewChild("chart", {static:false}) chart: ChartComponent;
   public chartOptionsDiscount: Partial<ChartOptions>;
   public chartDatasetsVolumLivratZile: Array<any> = [
-    { data: [], label: ["Volum mediu pe zi"] }
+    { data: [], label: ["Contitate medie pe zi"] }
   ];
   public chartLabelsVolum: Array<any> = [];
   public volumLivratZile :any;
@@ -88,10 +88,10 @@ export class GraficCantitateJudeteComponent implements OnInit {
   }
 
   async  getChartVOlumLIvrat(){
-    this.volumLivratZile= await this.salesService.getVolumZile().toPromise();
+    this.volumLivratZile= await this.salesService.getCantitateZile().toPromise();
     console.log(this.volumLivratZile)
     for(let i=0; i<this.volumLivratZile.length; i++){
-      this.chartDatasetsVolumLivratZile[0].data.push(this.volumLivratZile[i].VolumMediuLivrat)
+      this.chartDatasetsVolumLivratZile[0].data.push(this.volumLivratZile[i].CantitateMedieLivrata)
       this.chartLabelsVolum.push(this.volumLivratZile[i].ZiSaptamana)
     }
   }
