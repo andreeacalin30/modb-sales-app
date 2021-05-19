@@ -20,15 +20,20 @@ export class UpdateLinieVanzareComponent implements OnInit {
   public articolLista: any;
   public proiectLista: any;
   public partenerLista: any;
-    public dbConnections=[
+  public dbConnections=[
     {
-      value: 'conn1'
+      value: 'global'
     },{
-       value: 'conn2'
+       value: 'local1'
     },{
-       value: 'conn3'
+       value: 'local2'
+    },{
+       value: 'local3'
+    },{
+       value: 'local4'
     }
   ]
+  public defaultDB = 'global'
   public selectedConnection: any;
 
   async getVanzatoriLista(){
@@ -65,7 +70,7 @@ export class UpdateLinieVanzareComponent implements OnInit {
   public elemEditat: LinieVanzare;
 
   constructor( private route: ActivatedRoute,private router: Router, private formBuilder: FormBuilder, private salesService: SalesService) {
-
+  this.selectedConnection=this.defaultDB;
     this.linieVanzare= this.formBuilder.group({
       codArticol: ['', [Validators.required]],
       cantitate: ['', [Validators.required]],
@@ -133,7 +138,7 @@ export class UpdateLinieVanzareComponent implements OnInit {
         this.linieVanzare.get('discount').value, this.linieVanzare.get('vat').value,
         totalLinie,this.linieVanzare.get('idProiect').value)
         
-        this.salesService.updateLinieVanzare(newLinieVanzare).subscribe(data=>{console.log(data);
+        this.salesService.updateLinieVanzare(newLinieVanzare, this.selectedConnection).subscribe(data=>{console.log(data);
           this.router.navigateByUrl('/table-vanzari');});
         }
   }

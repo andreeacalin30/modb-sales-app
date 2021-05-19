@@ -362,7 +362,7 @@ export class SalesService {
   }
 
 
-  updateLinieVanzare(linieVanzare: any): Observable<any> {
+  updateLinieVanzare(linieVanzare: any, dbConnection:any): Observable<any> {
     console.log('post')
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -370,8 +370,9 @@ export class SalesService {
     .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
+    const params=new HttpParams().set('dbConnection', dbConnection.toString())
     return this.http.put(this.LiniiVanzariPath, linieVanzare, {
-        headers
+        headers, params
     }); 
   }
 
